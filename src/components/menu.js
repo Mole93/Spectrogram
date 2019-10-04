@@ -140,7 +140,7 @@ class MyMenu extends Component {
             {/* <button className="function-switch-button" onClick={this.switchToSignalGenerator}>Signal Generator</button> */}
           {/* </Menu.Item> */}
           <Menu.Item className="app-bar-dropdown-container"> 
-            <Dropdown text="Spectrogram" className="app-bar-dropdown" selection options={options} onChange={this.switchToSignalGenerator}>              
+            <Dropdown text="Not Spectrogram" className="app-bar-dropdown" selection options={options} onChange={this.switchToSignalGenerator}>              
               {/* <Icon fitted name = "bars" size="large" onClick={this.toggleAppBar} style={{"cursor":"pointer"}} id="bars"/> */}
             </Dropdown>
           </Menu.Item>
