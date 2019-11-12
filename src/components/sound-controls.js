@@ -263,7 +263,7 @@ class SoundControls extends Component {
                           <Dropdown
                           // text='Key'
                           // placeholder='Key'
-                          defaultValue={0}
+                          defaultValue={context.state.musicKey.value}
                           options={keyOptions}
                           onChange={context.handleKeyChange}
                           disabled={!context.state.isStarted}
@@ -281,7 +281,7 @@ class SoundControls extends Component {
                           <Dropdown
                           // text='Scale'
                           // placeholder='Scale'
-                          defaultValue={0}
+                          defaultValue={context.state.scale.value}
                           options={context.state.scaleOptionsList}
                           onChange={context.handleScaleChange}
                           disabled={!context.state.isStarted}
