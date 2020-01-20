@@ -90,7 +90,7 @@ export default function generateScale(startFreq, type, justIntonation) {
       //   break;
     case 7:
       // Minor Pentatonic
-      scalePattern = [0, 2, 3, 7, 10];
+      scalePattern = [0, 3, 5, 7, 10];
       break;
     case 8:
       // Pentatonic 2
