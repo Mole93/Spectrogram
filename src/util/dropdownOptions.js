@@ -51,7 +51,7 @@ const scaleOptions = [
     value: 6
   },
   {
-    text: "Minor Pentatonic: C, D, D#/Eb, G, A#/Bb",  // Minor Pentatonic
+    text: "Minor Pentatonic: C, D#/Eb, F, G, A#/Bb",  // Minor Pentatonic
     value: 7
   },
   {
