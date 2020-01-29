@@ -6,11 +6,17 @@ export default function generateScale(startFreq, type, justIntonation) {
   var scaleNames = [];
   var scale = [];
   var scalePattern = [];
-  var tuning = 440;
+  const tuning = 440;
   var tuning_ = tuning / 32;
   var notes = ['A', 'A#/Bb', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab'];
   // Formate Key so that 'C' is first key instead of 'A'
   startFreq = (startFreq + 3) % 12;
+
+  // If justIntonation, establish the fundamental tuning based on original freqs of the scale, not on just_intonation ratios
+  if (justIntonation) {
+    var just_tuning = tuning_ * Math.pow(2, startFreq / 12);
+  }
+
   switch (type) {
     case 0:
       // Major
@@ -40,54 +46,54 @@ export default function generateScale(startFreq, type, justIntonation) {
       // Major Pentatonic
       scalePattern = [0, 2, 4, 7, 9];
       break;
-      // case 7:
-      //   // Heptatonic 1
-      //   scalePattern = [0, 1, 4, 5, 7, 8, 11];
-      //   break;
-      // case 8:
-      //   // Heptatonic 2
-      //   scalePattern = [0, 2, 4, 5, 7, 8, 10];
-      //   break;
-      // case 9:
-      //   // Heptatonic 3
-      //   scalePattern = [0, 2, 3, 5, 7, 9, 10];
-      //   break;
-      // case 10:
-      //   // Heptatonic 4
-      //   scalePattern = [0, 2, 3, 6, 7, 9, 10];
-      //   break;
-      // case 11:
-      //   // Heptatonic 5
-      //   scalePattern = [0, 1, 3, 5, 7, 8, 10];
-      //   break;
-      // case 12:
-      //   // Heptatonic 6
-      //   scalePattern = [0, 2, 4, 5, 7, 9, 10];
-      //   break;
-      // case 13:
-      //   // Hexatonic 1
-      //   scalePattern = [0, 2, 3, 5, 7, 8];
-      //   break;
-      // case 14:
-      //   // Hexatonic 2
-      //   scalePattern = [0, 1, 3, 5, 7, 8];
-      //   break;
-      // case 15:
-      //   // Hexatonic 3
-      //   scalePattern = [0, 2, 3, 6, 7, 8];
-      //   break;
-      // case 16:
-      //   // Hexatonic 4
-      //   scalePattern = [0, 2, 3, 5, 7, 9];
-      //   break;
-      // case 17:
-      //   // Hexatonic 5
-      //   scalePattern = [0, 1, 4, 5, 7, 8];
-      //   break;
-      // case 18:
-      //   // Hexatonic 6
-      //   scalePattern = [0, 2, 4, 6, 7, 10];
-      //   break;
+    // case 7:
+    //   // Heptatonic 1
+    //   scalePattern = [0, 1, 4, 5, 7, 8, 11];
+    //   break;
+    // case 8:
+    //   // Heptatonic 2
+    //   scalePattern = [0, 2, 4, 5, 7, 8, 10];
+    //   break;
+    // case 9:
+    //   // Heptatonic 3
+    //   scalePattern = [0, 2, 3, 5, 7, 9, 10];
+    //   break;
+    // case 10:
+    //   // Heptatonic 4
+    //   scalePattern = [0, 2, 3, 6, 7, 9, 10];
+    //   break;
+    // case 11:
+    //   // Heptatonic 5
+    //   scalePattern = [0, 1, 3, 5, 7, 8, 10];
+    //   break;
+    // case 12:
+    //   // Heptatonic 6
+    //   scalePattern = [0, 2, 4, 5, 7, 9, 10];
+    //   break;
+    // case 13:
+    //   // Hexatonic 1
+    //   scalePattern = [0, 2, 3, 5, 7, 8];
+    //   break;
+    // case 14:
+    //   // Hexatonic 2
+    //   scalePattern = [0, 1, 3, 5, 7, 8];
+    //   break;
+    // case 15:
+    //   // Hexatonic 3
+    //   scalePattern = [0, 2, 3, 6, 7, 8];
+    //   break;
+    // case 16:
+    //   // Hexatonic 4
+    //   scalePattern = [0, 2, 3, 5, 7, 9];
+    //   break;
+    // case 17:
+    //   // Hexatonic 5
+    //   scalePattern = [0, 1, 4, 5, 7, 8];
+    //   break;
+    // case 18:
+    //   // Hexatonic 6
+    //   scalePattern = [0, 2, 4, 6, 7, 10];
+    //   break;
     case 7:
       // Minor Pentatonic
       scalePattern = [0, 3, 5, 7, 10];
@@ -119,20 +125,21 @@ export default function generateScale(startFreq, type, justIntonation) {
 
   }
 
-
   for (var i = 0; i < scalePattern.length; i++) {
     var currentF = Number(startFreq) + scalePattern[i];
     // use different frequency base for just intonation 
     if (justIntonation) {
-      
-      const justIntonationRatios = [1, 25/24, 9/8, 6/5, 5/4, 4/3, 45/32, 3/2, 8/5, 5/3, 9/5, 15/8];
-      scale.push((tuning_ /  justIntonationRatios[(12 - startFreq)]) * justIntonationRatios[scalePattern[i]]); // may need to multiply tuning by 2 for A3 400Hz
-
+      const justIntonationRatios = [1, 25 / 24, 9 / 8, 6 / 5, 5 / 4, 4 / 3, 45 / 32, 3 / 2, 8 / 5, 5 / 3, 9 / 5, 15 / 8];
+      scale.push(just_tuning * justIntonationRatios[scalePattern[i]]);
+      // Old justIntonation model which adjusted the fundamental based on ratios from 440Hz
+      // scale.push((tuning_ / justIntonationRatios[(12 - startFreq)%12]) * justIntonationRatios[scalePattern[i]]); // may need to multiply tuning by 2 for A3 400Hz
     } else {
       scale.push(tuning_ * Math.pow(Math.pow(2, 1 / 12), currentF));
     }
     scaleNames.push(notes[currentF % 12]);
   }
+
+  // console.log(scale[0]);
 
   let s = {
     scale: scale, // arr of freqs of the lowest octave

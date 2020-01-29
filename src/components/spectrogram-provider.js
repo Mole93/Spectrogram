@@ -196,7 +196,7 @@ class SpectrogramProvider extends Component {
           let scaleNotes = [0,0,0,0,0,0,0,0,0,0,0,0];
           const NUM_NOTES = 12;
           var idx = noteNameScale.indexOf(newKeyName);
-          console.log(idx, noteNameScale[idx]);
+          // console.log(idx, noteNameScale[idx]);
           for (let j = 0; j < NUM_NOTES; j++) {
             // console.log(j, idx, noteNameScale[idx]);
             scaleNotes[j] = noteNameScale[idx%12];
